@@ -4,6 +4,7 @@ import { ValueSchema } from '../models/Value'
 import { CarSchema } from '../models/Car.js';
 import { HouseSchema } from '../models/House';
 import { PetSchema } from '../models/Pet';
+import { JobSchema } from '../models/Job';
 
 
 class DbContext {
@@ -13,6 +14,8 @@ class DbContext {
   Houses = mongoose.model('House', HouseSchema)
 
   Pets = mongoose.model('Pets', PetSchema)
+
+  Jobs = mongoose.model('Jobs', JobSchema)
 }
 
 export const dbContext = new DbContext()
