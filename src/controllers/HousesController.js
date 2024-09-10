@@ -1,4 +1,5 @@
 import BaseController from "../utils/BaseController";
+import { housesService } from "../services/HousesService";
 
 
 
@@ -8,13 +9,28 @@ export class HousesController extends BaseController{
         super('api/houses')
         this.router
             .get('', this.getHouses)
+            .get('/:houseId', this.getHouseById)
     }
-    getHouses(request, response, next) {
+        async getHouses(request, response, next) {
         try {
-           response.send('Houses controller is working!')
+        //    response.send('Houses controller is working!')
+           const houses = await housesService.getHouses()
+           response.send(houses)
         } catch (error) {
             next(error)
         }
     }
+
+        async getHouseById(request, response, next) {
+        try {
+            const houseId = request.params.houseId
+            const house = await housesService.getHouseById(houseId)
+            response.send(house)
+        } catch (error) {
+           next(error) 
+        }
+    }
+
+
 
 }
