@@ -1,5 +1,5 @@
-import BaseController from "../utils/BaseController";
 import { housesService } from "../services/HousesService";
+import BaseController from "../utils/BaseController";
 
 
 
@@ -16,19 +16,18 @@ export class HousesController extends BaseController{
 
         async getHouses(request, response, next) {
         try {
-        //    response.send('Houses controller is working!')
-        //    const houses = await housesService.getHouses()
-           const query = request.query
-           const houses = await housesService.getHouses(query)
-           response.send(houses)
-           
+            const houses = await housesService.getHouses()
+            response.send(houses)
+       
         } catch (error) {
             next(error)
         }
     }
+           
+           
 
 
-    
+
 
         async getHouseById(request, response, next) {
         try {
