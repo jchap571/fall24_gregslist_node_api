@@ -13,8 +13,12 @@ class HousesService {
     }
 
 
-    async getHouses(){
-        const houses = await dbContext.Houses.find()
+    async getHouses(query){
+        // const houses = await dbContext.Houses.find(query)
+        const sortBy = query.sortBy
+        delete query.sortBy
+        
+        const houses = await dbContext.Houses.find(query).sort(sortBy + 'createdAt') 
         return houses
     }
 }
