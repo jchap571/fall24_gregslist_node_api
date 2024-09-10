@@ -14,6 +14,7 @@ export class JobsController extends BaseController{
     async getJobs(request, response, next){
         try {
             const jobs = await jobsService.getJobs()
+            response.send(jobs)
         } catch (error) {
             next(error)
         }
@@ -22,8 +23,9 @@ export class JobsController extends BaseController{
 
     async getJobById(request, response, next){
         try {
-            cosnt jobId = request.params.jobId
+            const jobId = request.params.jobId
             const job = await jobsService.getJobById(jobId)
+            response.send(job)
         } catch (error) {
             next(error)
         }

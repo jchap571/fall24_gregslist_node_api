@@ -13,6 +13,7 @@ export class PetsController extends BaseController{
         try {
             const petId = request.params.petId
             const pet = await petsService.getPetById(petId)
+            response.send(pet)
         } catch (error) {
             next(error)
         }

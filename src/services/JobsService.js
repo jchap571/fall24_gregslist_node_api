@@ -9,9 +9,13 @@ class JobsService{
         if (job == null) {
             throw new BadRequest(`Can't find job by that ID`)
         }
-
         return job
+
     }
+
+
+
+
     async getJobs(){
         const jobs = await dbContext.Jobs.find()
         return jobs
