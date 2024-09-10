@@ -11,15 +11,24 @@ export class HousesController extends BaseController{
             .get('', this.getHouses)
             .get('/:houseId', this.getHouseById)
     }
+
+
+
         async getHouses(request, response, next) {
         try {
         //    response.send('Houses controller is working!')
-           const houses = await housesService.getHouses()
+        //    const houses = await housesService.getHouses()
+           const query = request.query
+           const houses = await housesService.getHouses(query)
            response.send(houses)
+           
         } catch (error) {
             next(error)
         }
     }
+
+
+    
 
         async getHouseById(request, response, next) {
         try {

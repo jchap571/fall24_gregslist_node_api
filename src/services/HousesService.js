@@ -13,9 +13,29 @@ class HousesService{
     }
 
 
-    async getHouses(){
-        const houses = await dbContext.Houses.find()
-        return houses
+    async getHouses(query){
+        const sortBy = query.sort
+        delete query.sort
+
+        const pageNumber = parseInt(query.page) || 1
+        const limitAmount = 10
+        const skipAmount = (pageNumber - 1) * limitAmount
+        delete query.page
+
+        
+        const houses = await dbContext.Houses.find(query)
+            .sort(sortBy + 'createdAt')
+            .skip(skipAmount)
+            .limit(limitAmount)
+            .populate('creator')
+
+        const houseCount = await dbContext.Houses.countDocuments(query)    
+        return{
+            
+        results: houses,
+        count: houseCount,
+        currentPage: pageNumber,
+        totalPages: Math.ceil(houseCount / limitAmount)
     }
 }
 
